@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - echo Installing Cypress...
+      - npm install
+  pre_build:
+    commands:
+      - echo Running Cypress tests...
+  build:
+    commands:
+      - npx cypress run --headless --browser chrome
+  post_build:
+    commands:
+      - echo Cypress tests finished
+      - # Save test results if needed (to S3 or other services)
+artifacts:
+  files:
+    - cypress/results/**/*  # Customize this path based on where you store test results
